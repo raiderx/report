@@ -1,6 +1,7 @@
 package org.karpukhin.report.config;
 
 import org.karpukhin.report.converter.ByteArrayToFileDataConverter;
+import org.karpukhin.report.converter.FileDataToZipConverter;
 import org.karpukhin.report.converter.ReportEntryListToXlsConverter;
 import org.karpukhin.report.converter.ReportEntryToModifiedReportEntryConverter;
 import org.karpukhin.report.converter.CompositeConverter;
@@ -54,6 +55,8 @@ public class Config {
         delegates.add(new ListToReportConverter());
         delegates.add(new ObjectToXmlConverter(aliases));
         delegates.add(new ByteArrayToFileDataConverter("${agent}-${date-year-first}.xml"));
+        delegates.add(new FileDataToZipConverter());
+        delegates.add(new ByteArrayToFileDataConverter("${agent}-${date-year-first}.zip"));
         Converter<ReportEntry, FileData> converter = new CompositeConverter<>(delegates);
 
         DataWriter<FileData> writer = new CompositeDataWriter<>(Arrays.asList(
