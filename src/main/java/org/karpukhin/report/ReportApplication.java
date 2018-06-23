@@ -16,16 +16,26 @@ import java.util.Map;
 public class ReportApplication implements ApplicationRunner {
 
     @Autowired
-    private DailyJob dailyJob;
+    private DailyJob dailyXmlJob;
+
+    @Autowired
+    private DailyJob dailyXlsJob;
 
     @Override
     public void run(ApplicationArguments args) {
         Map<String, Object> data = new LinkedHashMap<>();
         data.put(ReportConfiguration.DATE, "16.06.2018");
         data.put(ReportConfiguration.AGENT, "some-agent");
-        data.put(ReportConfiguration.EMAIL, "test@email.com");
+        data.put(ReportConfiguration.EMAIL, "some-agent@email.com");
 
-        JobExecutor executor = new JobExecutor(dailyJob);
+        JobExecutor executor = new JobExecutor(dailyXmlJob);
+        executor.execute(data);
+
+        data = new LinkedHashMap<>();
+        data.put(ReportConfiguration.AGENT, "another-agent");
+        data.put(ReportConfiguration.EMAIL, "another-agent@email.com");
+
+        executor = new JobExecutor(dailyXlsJob);
         executor.execute(data);
     }
 

@@ -28,7 +28,7 @@ public class ObjectToXmlConverter implements Converter<Object, byte[]> {
     }
 
     public byte[] convert(Object o) {
-        log.info("Object was converted to XML document");
+        log.info("Object was converted to array of bytes as XML document");
         return xStream.toXML(o).getBytes(charset);
     }
 }

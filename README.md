@@ -7,6 +7,6 @@ Input data can be read from database, files and etc.
 
 Converters can convert data from one form to another.
 
-Output data can be written to file, sent by E-mail and etc.
+Output data can be written to file (e.g. XML, XLS), sent by E-mail and etc.
 
 See org.karpukhin.report.ReportApplication and org.karpukhin.report.config.Config
