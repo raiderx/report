@@ -3,6 +3,7 @@ package org.karpukhin.report.converter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
@@ -29,6 +30,9 @@ public class ReportEntryListToXlsConverter implements Converter<List<ReportEntry
 
     @Override
     public byte[] convert(List<ReportEntry> reportEntries) {
+        if (CollectionUtils.isEmpty(reportEntries)) {
+            return new byte[0];
+        }
         String finalTemplate = JobContext.replace(template);
         try (InputStream stream = resourceLoader.getResource(finalTemplate).getInputStream();
              POIFSFileSystem fs = new POIFSFileSystem(stream);

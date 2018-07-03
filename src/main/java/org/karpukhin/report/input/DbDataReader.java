@@ -7,7 +7,7 @@ import org.karpukhin.report.job.JobContext;
 import org.karpukhin.report.job.ReportConfiguration;
 import org.karpukhin.report.model.ReportEntry;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -22,18 +22,10 @@ public class DbDataReader implements DataReader<List<ReportEntry>> {
 
         log.info("Getting data from DB for interval {} to {}", FULL.format(fromDate), FULL.format(toDate));
 
-        List<ReportEntry> result = new ArrayList<>();
-        result.add(airReport(1, "Bill", "Gates"));
-        result.add(airReport(2, "Steve", "Ballmer"));
-        result.add(airReport(3, "Satya", "Nadella"));
-        return result;
-    }
-
-    private ReportEntry airReport(int id, String firstName, String lastName) {
-        ReportEntry result = new ReportEntry();
-        result.setId(id);
-        result.setFirstName(firstName);
-        result.setLastName(lastName);
-        return result;
+        return Arrays.asList(
+                new ReportEntry(1, "Bill", "Gates"),
+                new ReportEntry(2, "Steve", "Ballmer"),
+                new ReportEntry(3, "Satya", "Nadella")
+        );
     }
 }
